@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animated Scene</title>
+</head>
+<body>
+
+<h2>Animated Scene (Moving Sun)</h2>
+
+<canvas id="myCanvas" width="500" height="350" style="border:1px solid black;"></canvas>
+
+<script>
+let canvas = document.getElementById("myCanvas");
+let ctx = canvas.getContext("2d");
+
+// Sun position
+let sunX = 50;
+
+// Animation function
+function drawScene(){
+
+    // Clear canvas
+    ctx.clearRect(0, 0, 500, 350);
+
+    // Sky
+    ctx.fillStyle = "lightblue";
+    ctx.fillRect(0, 0, 500, 350);
+
+    // Ground
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, 250, 500, 100);
+
+    // Sun (circle)
+    ctx.beginPath();
+    ctx.arc(sunX, 80, 30, 0, 2 * Math.PI);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+
+    // House (rectangle)
+    ctx.fillStyle = "brown";
+    ctx.fillRect(200, 180, 120, 80);
+
+    // Roof (triangle using lines)
+    ctx.beginPath();
+    ctx.moveTo(200, 180);
+    ctx.lineTo(320, 180);
+    ctx.lineTo(260, 130);
+    ctx.closePath();
+    ctx.fillStyle = "red";
+    ctx.fill();
+
+    // Door
+    ctx.fillStyle = "black";
+    ctx.fillRect(245, 210, 30, 50);
+
+    // Windows
+    ctx.fillStyle = "white";
+    ctx.fillRect(215, 200, 25, 25);
+    ctx.fillRect(285, 200, 25, 25);
+
+    // Move sun
+    sunX += 1;
+
+    // Reset sun
+    if(sunX > 550){
+        sunX = -50;
+    }
+
+    // Animation loop
+    requestAnimationFrame(drawScene);
+}
+
+// Start animation
+drawScene();
+
+</script>
+
+</body>
+</html>
